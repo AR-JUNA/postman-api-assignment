@@ -45,4 +45,4 @@ postman-api-assignment/
 - [x] README documented
 
 ## Contact
-For questions about this submission, please contact: 
+For questions about this submission, please contact: a.gyan@alustudent.com
