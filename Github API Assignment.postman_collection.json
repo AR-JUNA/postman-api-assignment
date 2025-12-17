@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "a9fd068e-fee8-4011-a723-e636e5d13d02",
+		"name": "Github API Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50812264",
+		"_collection_link": "https://ar-juna-2797734.postman.co/workspace/Arjuna's-Workspace~76a14791-b836-402b-8fae-8024ba190c61/collection/50812264-a9fd068e-fee8-4011-a723-e636e5d13d02?action=share&source=collection_link&creator=50812264"
+	},
+	"item": [
+		{
+			"name": "Get My User Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Check if response status is 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test 2: Check if response has your login/username\r",
+							"pm.test(\"Response has login field\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.login).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"// Test 3: Check if response has your ID\r",
+							"pm.test(\"Response has ID\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.be.a('number');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Repository",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Simple test - check status only\r",
+							"pm.test(\"Repository created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    console.log(\"Repository created successfully!\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"gyannn-test-final-001\",\r\n  \"description\": \"Final test repository\",\r\n  \"private\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Repository",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update successful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Description updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.description).to.eql(\"Updated description from Postman PATCH request\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Updated description from Postman PATCH request\",\r\n  \"private\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/AR-JUNA/gyannn-test-final-001",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"AR-JUNA",
+						"gyannn-test-final-001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Repository",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete successful\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/AR-JUNA/gyannn-test-final-001",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"AR-JUNA",
+						"gyannn-test-final-001"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
